@@ -19,7 +19,7 @@ CHANNELS = ["prodigeekOfferte", "offertepuntotech"]
 # ============================================================
 KEYWORDS = [
     "SSD 1TB",
-    # "RTX 4070",
+    "Prezzo",
     # "monitor 27",
 ]
 
