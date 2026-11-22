@@ -9,7 +9,7 @@ from pathlib import Path
 import requests
 from bs4 import BeautifulSoup
 
-CHANNELS = ["prodigeekOfferte", "offertepuntotech"]
+CHANNELS = ["prodigeekOfferte", "offertepuntotech", "prophecytechofferte", "vereoffertetech"]
 
 # ============================================================
 # PAROLE DA CERCARE: aggiungi qui le tue, tra virgolette, separate da virgola.
