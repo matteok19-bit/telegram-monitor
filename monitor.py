@@ -19,7 +19,7 @@ CHANNELS = ["prodigeekOfferte", "offertepuntotech"]
 # ============================================================
 KEYWORDS = [
     "SSD 1TB",
-    "prezzo",  # parola di prova: toglila quando le notifiche funzionano
+    #"prezzo",  # parola di prova: toglila quando le notifiche funzionano
     # "RTX 4070",
     # "monitor 27",
 ]
