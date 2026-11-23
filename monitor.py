@@ -9,7 +9,7 @@ from pathlib import Path
 import requests
 from bs4 import BeautifulSoup
 
-CHANNELS = ["prodigeekOfferte", "offertepuntotech", "prophecytechofferte", "vereoffertetech"]
+CHANNELS = ["prodigeekOfferte", "offertepuntotech"]
 
 # ============================================================
 # PAROLE DA CERCARE: aggiungi qui le tue, tra virgolette, separate da virgola.
@@ -19,7 +19,8 @@ CHANNELS = ["prodigeekOfferte", "offertepuntotech", "prophecytechofferte", "vere
 # ============================================================
 KEYWORDS = [
     "SSD 1TB",
-    "Prezzo",
+    "prezzo",  # parola di prova: toglila quando le notifiche funzionano
+    # "RTX 4070",
     # "monitor 27",
 ]
 
@@ -88,17 +89,23 @@ def main():
 
         last_seen = state.get(channel)
         newest = posts[-1][0]
+        new_posts = [p for p in posts if last_seen is not None and p[0] > last_seen]
+
+        print(
+            f"[{channel}] letti {len(posts)} post, ultimo id {newest}, "
+            f"ultimo visto {last_seen}, nuovi {len(new_posts)}"
+        )
+        print(f"[{channel}] ultimo post: {posts[-1][1][:80]!r}")
+        print(f"[{channel}] parole cercate: {KEYWORDS}")
 
         if last_seen is None:
             # Prima esecuzione: memorizzo il punto di partenza senza notificare
             print(f"[{channel}] prima esecuzione, parto dal post {newest}")
         else:
-            for post_id, text in posts:
-                if post_id <= last_seen:
-                    continue
+            for post_id, text in new_posts:
                 keyword = find_keyword(text)
+                print(f"[{channel}] nuovo post {post_id}: parola trovata = {keyword}")
                 if keyword:
-                    print(f"[{channel}] '{keyword}' trovato nel post {post_id}")
                     notify(channel, keyword, post_id, text)
 
         state[channel] = max(newest, last_seen or 0)
